@@ -23,19 +23,19 @@ from rest_framework.permissions import IsAuthenticated
 def enpoint(request):
     data = {
         "Enpoint" : "Api/",
-        "Getting User" : "api/user/",
+        "Getting User" : "api/user",
         "Get, Update, Delete User" : "api/user/id",
-        "Get and Update User Profile" : "api/userprofile/update/",
+        "Get and Update User Profile" : "api/userprofile/update",
 
         # ===================== NEWS ========================
-        "Get and Create News" : "api/news/",
-        "Get and Create NewsLetter" : "api/newsLetter/",
+        "Get and Create News" : "api/news",
+        "Get and Create NewsLetter" : "api/newsLetter",
 
 
         # ===================== SUB ===============================
-        "Monthly Subscription" : "api/subMonthly/",
-        "Yearly Subscription" : "api/subYearly/",
-        "Yearly Print Subscription" : "api/subYealyPrint/",
+        "Monthly Subscription" : "api/subMonthly",
+        "Yearly Subscription" : "api/subYearly",
+        "Yearly Print Subscription" : "api/subYealyPrint",
         
 
     }
@@ -45,7 +45,7 @@ def enpoint(request):
 class UserGetCreate(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    
+
     def create(self, request, *args, **kwargs):
         response = super().create(request, *args, **kwargs)
         return Response({'message': 'User created successfully'}, status=status.HTTP_201_CREATED)
