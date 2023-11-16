@@ -2,9 +2,6 @@
 
 from django.urls import path
 from . import views
-from django.conf import settings
-from django.conf.urls.static import static
-from django.urls import path, include
 
 
 urlpatterns = [
@@ -29,6 +26,3 @@ urlpatterns = [
     path('api/subYealyPrint', views.BasicSubscriptionPlanViewSet.as_view(), name="subBasic"),
 ]
 
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
