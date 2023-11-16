@@ -65,13 +65,3 @@ class SubscriptionPlanSerializer(ModelSerializer):
     class Meta:
         model = SubscriptionPlan
         fields = ['user', 'price', 'category', 'start_date', 'end_date', 'payment_status']
-
-
-
-    #         user = models.ForeignKey(User, on_delete=models.CASCADE)
-    # price = models.DecimalField(max_digits=10, decimal_places=2)
-    # category = models.CharField(max_length=20, choices=CATEGORY_CHOICES)
-    # start_date = models.DateField()
-    # end_date = models.DateField()
-    # payment_status = models.BooleanField(default=False)
-

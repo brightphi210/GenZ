@@ -110,11 +110,6 @@ class Category(models.Model):
 
 
 # ======================= News ========================================
-class Image(models.Model):
-    image = models.ImageField(upload_to='news_pics/', default='default.png', blank=True, null=True)
-
-    # def __str__(self):
-    #     return self.image
 
 
 class News(models.Model):
@@ -142,7 +137,7 @@ class Stories(models.Model):
     date_added = models.DateTimeField(auto_now_add=True, blank=True, null=True)
 
     def __str__(self):
-        return {self.title}
+        return self.title
     
 
 class NewsLetter(models.Model):

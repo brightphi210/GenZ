@@ -78,11 +78,6 @@ class MagazineGet(generics.ListAPIView):
     pass
 
 
-class ImageGet(generics.ListAPIView):
-    serializer_class = ImageSerializer
-    queryset =Image.objects.all()
-
-
 class NewsGet(generics.ListCreateAPIView):
 
     queryset = News.objects.all()
