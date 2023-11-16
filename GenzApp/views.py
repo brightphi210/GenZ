@@ -44,7 +44,11 @@ def enpoint(request):
 
 class UserGetCreate(generics.ListCreateAPIView):
     queryset = User.objects.all()
-    serializer_class = UserSerializer 
+    serializer_class = UserSerializer
+    
+    def create(self, request, *args, **kwargs):
+        response = super().create(request, *args, **kwargs)
+        return Response({'message': 'User created successfully'}, status=status.HTTP_201_CREATED)
 
 
 class UserGetUpdateDelete(generics.RetrieveUpdateDestroyAPIView):
