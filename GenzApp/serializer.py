@@ -43,13 +43,13 @@ class ImageSerializer(ModelSerializer):
 class NewSerializer(ModelSerializer):
     class Meta:
         model = News
-        fields = ['id', 'title', 'intro', 'author', 'image1',  'category', 'body', 'date_added']
+        fields = '__all__'
         depth = 1
 
 class StorySerializer(ModelSerializer):
     class Meta:
         model = Stories
-        fields = ['id', 'title', 'intro', 'author', 'image1',  'category', 'body', 'date_added']
+        fields = '__all__'
         depth = 1
 
 
