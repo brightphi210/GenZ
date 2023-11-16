@@ -56,7 +56,7 @@ class StorySerializer(ModelSerializer):
 class NewsLetterSerializer(ModelSerializer):
     class Meta:
         model = NewsLetter
-        fields = ['id', 'user', 'subscribed', 'subscribed_date']
+        fields = ['id', 'email', 'subscribed', 'subscribed_date']
         depth = 1
 
 

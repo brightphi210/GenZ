@@ -121,9 +121,7 @@ class News(models.Model):
     
     author = models.ForeignKey(Authors, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    image1 = models.ImageField(default='default.png', upload_to='news_pics/', blank=True, null=True)
-    # image2 = models.ImageField(default='default.png', upload_to='news_pics/', blank=True, null=True)
-    # images = models.ManyToManyField(Image)
+    image = models.ImageField(default='default.png', upload_to='news_pics/', blank=True, null=True)
     title = models.CharField(max_length=225, blank=True, null=True)
     intro = models.TextField()
     body = models.TextField(blank=True, null=True)
@@ -148,7 +146,8 @@ class Stories(models.Model):
     
 
 class NewsLetter(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    # email = models.EmailField(max_length=255)
+    email = models.EmailField(max_length=255, null=True, blank= True)
     subscribed = models.BooleanField(default=False)
     subscribed_date = models.DateTimeField(auto_now_add=True)
 
