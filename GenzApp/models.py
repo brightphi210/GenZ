@@ -76,7 +76,7 @@ class UserProfile(models.Model):
         upload_to='profile_pics/', default='default.png', blank=True, null=True)
 
     def __str__(self):
-        return self.user.username
+        return self.user.email
 
 
 # ====================== Authors ============================
