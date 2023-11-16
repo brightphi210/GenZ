@@ -74,7 +74,7 @@ SIMPLE_JWT = {
 
     "SLIDING_TOKEN_REFRESH_EXP_CLAIM": "refresh_exp",
     "SLIDING_TOKEN_LIFETIME": timedelta(minutes=5),
-    "SLIDING_TOKEN_REFRESH_LIFETIME": timedelta(days=30),
+    "SLIDING_TOKEN_REFRESH_LIFETIME": timedelta(days=1),
 
     "TOKEN_OBTAIN_SERIALIZER": "rest_framework_simplejwt.serializers.TokenObtainPairSerializer",
     "TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSerializer",
@@ -147,8 +147,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'railway',
         'USER': 'postgres',
-        'PASSWORD': '1a*2ffDGaAEf1-DggEb6A5aAfAf**gEb',
-        'HOST': 'monorail.proxy.rlwy.net',
+        'PASSWORD': 'eGa2afB*DA6C4-ADD6B-B5c6F1dacdCf',
+        'HOST': 'roundhouse.proxy.rlwy.net',
         'PORT': '53449',
     }
 }
