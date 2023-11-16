@@ -116,7 +116,7 @@ class News(models.Model):
     
     author = models.ForeignKey(Authors, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='news_pics/', blank=True, null=True)
+    image = models.ImageField(upload_to='images/', blank=True, null=True)
     title = models.CharField(max_length=225, blank=True, null=True)
     intro = models.TextField()
     body = models.TextField(blank=True, null=True)
@@ -130,7 +130,7 @@ class Stories(models.Model):
     
     author = models.ForeignKey(Authors, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    image = models.ImageField(default='default.png', upload_to='news_pics/', blank=True, null=True)
+    image = models.ImageField(upload_to='images/', blank=True, null=True)
     title = models.CharField(max_length=225, blank=True, null=True)
     intro = models.TextField()
     body = models.TextField(blank=True, null=True)

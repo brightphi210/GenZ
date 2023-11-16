@@ -16,6 +16,10 @@ from .models import *
 
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
+
+from supabase_client import supabase
+from rest_framework.response import Response
+from rest_framework import status
 # Create your views here.
 
 
@@ -84,6 +88,24 @@ class NewsGet(generics.ListCreateAPIView):
     serializer_class = NewSerializer
     filter_backends = [filters.SearchFilter]
     search_fields = ['title', 'intro', 'body']
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        # Save image to Supabase Storage
+        file = request.data['image']
+        file_name = file.name
+        file_data = file.read()
+
+        response = supabase.storage.from_bucket("images").upload(file_name, file_data)
+
+        if response["error"]:
+            return Response(response, status=status.HTTP_400_BAD_REQUEST)
+
+        # Save image details to your Django model
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
     # authentication_classes = [TokenAuthentication]
     # permission_classes = [IsAuthenticated]
 
