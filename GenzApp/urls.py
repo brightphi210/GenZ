@@ -2,6 +2,10 @@
 
 from django.urls import path
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
+from django.urls import path, include
+
 
 urlpatterns = [
     path('api/', views.enpoint, name="enpoint"),
@@ -24,3 +28,7 @@ urlpatterns = [
     path('api/subYearly', views.BasicSubscriptionPlanViewSet.as_view(), name="subBasic"),
     path('api/subYealyPrint', views.BasicSubscriptionPlanViewSet.as_view(), name="subBasic"),
 ]
+
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
