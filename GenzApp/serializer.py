@@ -1,0 +1,77 @@
+
+from .models import *
+from rest_framework.serializers import ModelSerializer
+
+
+class UserSerializer(ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'name', 'email', 'password', 'terms']
+
+    def create(self, validated_data):
+        password = validated_data.pop('password')
+        user = User(**validated_data)
+        user.set_password(password)
+        user.save()
+        return user
+        # extra_kwargs = {'password': {'write_only': True}}
+
+class AuthorSerializer(ModelSerializer):
+    class Meta:
+        model = Authors
+        fields = '__all__'
+
+class UserProfileSerializer(ModelSerializer):
+    user = UserSerializer(read_only=True)
+
+    class Meta:
+        model = UserProfile
+        fields = '__all__'
+
+
+class CategorySerializer(ModelSerializer):
+    class Meta:
+        model = Category
+        fields = '__all__'
+
+class ImageSerializer(ModelSerializer):
+    class Meta:
+        model = Image
+        fields = ['id', 'image']
+
+
+class NewSerializer(ModelSerializer):
+    class Meta:
+        model = News
+        fields = ['id', 'title', 'intro', 'author', 'image1',  'category', 'body', 'date_added']
+        depth = 1
+
+class StorySerializer(ModelSerializer):
+    class Meta:
+        model = Stories
+        fields = ['id', 'title', 'intro', 'author', 'image1',  'category', 'body', 'date_added']
+        depth = 1
+
+
+class NewsLetterSerializer(ModelSerializer):
+    class Meta:
+        model = NewsLetter
+        fields = ['id', 'user', 'subscribed', 'subscribed_date']
+        depth = 1
+
+
+# =================== Subscriptio ================================
+class SubscriptionPlanSerializer(ModelSerializer):
+    class Meta:
+        model = SubscriptionPlan
+        fields = ['user', 'price', 'category', 'start_date', 'end_date', 'payment_status']
+
+
+
+    #         user = models.ForeignKey(User, on_delete=models.CASCADE)
+    # price = models.DecimalField(max_digits=10, decimal_places=2)
+    # category = models.CharField(max_length=20, choices=CATEGORY_CHOICES)
+    # start_date = models.DateField()
+    # end_date = models.DateField()
+    # payment_status = models.BooleanField(default=False)
+
