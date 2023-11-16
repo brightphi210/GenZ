@@ -192,7 +192,8 @@ STATIC_URL = 'static/'
 
 import os
 # Directory where uploaded media is saved.
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = '/var/task/media/'
 MEDIA_URL = '/media/'  # Public URL at the browser
 
 # Default primary key field type
