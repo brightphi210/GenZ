@@ -204,7 +204,3 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles_build", 'media')
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-
-SUPABASE_URL = 'your_supabase_url'
-SUPABASE_KEY = 'your_supabase_key'
