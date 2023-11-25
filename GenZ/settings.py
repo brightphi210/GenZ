@@ -134,24 +134,24 @@ WSGI_APPLICATION = 'GenZ.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
-        'USER': 'postgres',
-        'PASSWORD': '1a*2ffDGaAEf1-DggEb6A5aAfAf**gEb',
-        'HOST': 'monorail.proxy.rlwy.net',
-        'PORT': '53449',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'railway',
+#         'USER': 'postgres',
+#         'PASSWORD': '1a*2ffDGaAEf1-DggEb6A5aAfAf**gEb',
+#         'HOST': 'monorail.proxy.rlwy.net',
+#         'PORT': '53449',
+#     }
+# }
 
 
 # Password validation

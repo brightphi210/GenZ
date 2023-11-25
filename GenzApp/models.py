@@ -141,7 +141,6 @@ class Stories(models.Model):
     
 
 class NewsLetter(models.Model):
-    # email = models.EmailField(max_length=255)
     email = models.EmailField(max_length=255, null=True, blank= True)
     subscribed = models.BooleanField(default=False)
     subscribed_date = models.DateTimeField(auto_now_add=True)

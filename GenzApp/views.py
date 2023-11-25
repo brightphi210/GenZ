@@ -11,16 +11,12 @@ from .models import *
 
 from .serializer import *
 
+
 from rest_framework.response import Response
 from .models import *
 
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
-
-from supabase_client import supabase
-from rest_framework.response import Response
-from rest_framework import status
-# Create your views here.
 
 
 @api_view(["GET"])
@@ -46,14 +42,37 @@ def enpoint(request):
 
     return Response(data)
 
+# class UserGetCreate(generics.ListCreateAPIView):
+#     queryset = User.objects.all()
+#     serializer_class = UserSerializer
+
+#     def create(self, request, *args, **kwargs):
+#         response = super().create(request, *args, **kwargs)
+#         return Response({'message': 'User created successfully'}, status=status.HTTP_201_CREATED)
+        
+
 class UserGetCreate(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
     def create(self, request, *args, **kwargs):
-        response = super().create(request, *args, **kwargs)
-        return Response({'message': 'User created successfully'}, status=status.HTTP_201_CREATED)
+        email = request.data.get('email', None)
 
+        # Check if a user with the given email already exists
+        if email and User.objects.filter(email=email).exists():
+            return Response({'message': 'User with this email already exists'}, status=status.HTTP_400_BAD_REQUEST)
+
+        response = super().create(request, *args, **kwargs)
+        
+        # Check if the creation was successful
+        if response.status_code == status.HTTP_201_CREATED:
+            return Response({'message': 'User created successfully'}, status=status.HTTP_201_CREATED)
+        else:
+            # Registration failed, customize the error message
+            error_message = {'message': 'User registration failed. Please check the provided data.'}
+            response.data = error_message
+            return response
+        
 
 class UserGetUpdateDelete(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
@@ -83,33 +102,24 @@ class MagazineGet(generics.ListAPIView):
 
 
 class NewsGet(generics.ListCreateAPIView):
-
     queryset = News.objects.all()
     serializer_class = NewSerializer
     filter_backends = [filters.SearchFilter]
     search_fields = ['title', 'intro', 'body']
 
     def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-
-        # Save image to Supabase Storage
-        file = request.data['image']
-        file_name = file.name
-        file_data = file.read()
-
-        response = supabase.storage.from_bucket("images").upload(file_name, file_data)
-
-        if response["error"]:
-            return Response(response, status=status.HTTP_400_BAD_REQUEST)
-
-        # Save image details to your Django model
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-    # authentication_classes = [TokenAuthentication]
-    # permission_classes = [IsAuthenticated]
-
-
+        response = super().create(request, *args, **kwargs)
+        
+        # Check if the creation was successful
+        if response.status_code == status.HTTP_201_CREATED:
+            return Response({'message': 'News created successfully'}, status=status.HTTP_201_CREATED)
+        else:
+            # Creation failed, customize the error message
+            error_message = {'message': 'News creation failed. Please check the provided data.'}
+            response.data = error_message
+            return response
+        
+        
 
 class StoryGet(generics.ListCreateAPIView):
 

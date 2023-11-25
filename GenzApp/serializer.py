@@ -44,7 +44,7 @@ class NewSerializer(ModelSerializer):
     class Meta:
         model = News
         fields = '__all__'
-        depth = 1
+        # depth = 1
 
 class StorySerializer(ModelSerializer):
     class Meta:
