@@ -119,7 +119,7 @@ class NewsGet(generics.ListCreateAPIView):
             response.data = error_message
             return response
         
-        
+
 
 class StoryGet(generics.ListCreateAPIView):
 
@@ -128,11 +128,37 @@ class StoryGet(generics.ListCreateAPIView):
     filter_backends = [filters.SearchFilter]
     search_fields = ['title', 'intro', 'body']
 
+    def create(self, request, *args, **kwargs):
+        response = super().create(request, *args, **kwargs)
+        
+        # Check if the creation was successful
+        if response.status_code == status.HTTP_201_CREATED:
+            return Response({'message': 'Story created successfully'}, status=status.HTTP_201_CREATED)
+        else:
+            # Creation failed, customize the error message
+            error_message = {'message': 'Story creation failed. Please check the provided data.'}
+            response.data = error_message
+            return response
+
 
 
 class NewsLetterView(generics.ListCreateAPIView):
     queryset = NewsLetter.objects.all()
     serializer_class = NewsLetterSerializer
+
+    def create(self, request, *args, **kwargs):
+        response = super().create(request, *args, **kwargs)
+        
+        # Check if the creation was successful
+        if response.status_code == status.HTTP_201_CREATED:
+            return Response({'message': 'Subcription successfull'}, status=status.HTTP_201_CREATED)
+        else:
+            # Creation failed, customize the error message
+            error_message = {'message': 'Subsription creation failed. Please check the provided data.'}
+            response.data = error_message
+            return response
+
+    
 
 
 
